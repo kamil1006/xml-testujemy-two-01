@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+
+<html xmlns:form="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<body>
+
+<h2>Pobieranie danych xml</h2>
+<p> </p>
+<div th:if="${message2}">
+    <h2 th:text="${message2}"/>
+</div>
+<br>
+<div >
+    <p> wybrane kolumny</p>
+    <div th:each="kolumna : ${wybraneKolumny}">
+        <div >
+            <a  th:text="${kolumna.poziom}" />
+            <a  th:text="${kolumna.wezel}" />
+            <a  th:text="${kolumna.nazwa}" />
+            <a  th:text="${kolumna.ojciec}" />
+        </div>
+    </div>
+</div>
+<br>
+<form method="POST"  action="/generujExcel">
+    <label>wybierz --> </label>
+    <input type="submit" th:name ="wybor" th:value="generujExcel">
+</form>
+
+
+
+<p>  kolumny</p>
+<div th:each="wynik : ${wyniki}">
+    <div >
+        <!--
+        <a  th:text="${wynik.wiersz}" />
+       -->
+    </div>
+</div>
+</body>
+</html>

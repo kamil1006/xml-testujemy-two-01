@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+
+<html xmlns:form="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<body>
+
+<h2>Pobieranie danych xml</h2>
+<p> </p>
+<div th:if="${message}">
+    <h2 th:text="${message}"/>
+</div>
+<!-- -->
+<br>
+<!-- -->
+<div>
+    <form method="POST" enctype="multipart/form-data" action="/">
+        <table>
+            <tr><td>wyszukaj plik:</td><td><input type="file" name="file" /></td></tr>
+            <tr><td></td><td><input type="submit" value="Wczytaj" /></td></tr>
+        </table>
+    </form>
+</div>
+<br>
+<div th:if="${ilPoziomow}">
+    ilosc poziomow:
+    <h2 th:text="${ilPoziomow}"/>
+</div>
+<br>
+
+<div>
+    <ul>
+        <li th:each="poziom : ${poziomy}">
+            <a  th:text="${poziom}" />
+        </li>
+    </ul>
+</div>
+
+<div th:if="${ilPoziomow}">
+    <ul>
+        <p> wezly</p>
+
+        <form method="POST"  action="/wybor">
+        <div th:each="wiersz : ${wiersze}">
+            <div th:if="${wiersz.wezel == 'tak'}">
+            <label>poziom </label><a  th:text="${wiersz.poziom}" />
+            <label> czy wezel: </label><a  th:text="${wiersz.wezel}" />
+           <label> nazwa wiersza </label> <a  th:text="${wiersz.nazwa}" />
+               <label>ojciec to </label> <a  th:text="${wiersz.ojciec}" />
+                <label> ilosc wystapien to </label> <a  th:text="${wiersz.iloscWystapien}" />
+                <label>wybierz --> </label>
+                <input type="submit" th:name ="wybor" th:value="${wiersz.nazwa}">
+           </div>
+        </div>
+        </form>
+    </ul>
+
+            <p> nie wezly</p>
+            <div th:each="wiersz : ${wiersze}">
+                <div th:if="${wiersz.wezel == 'nie'}">
+                    <a  th:text="${wiersz.poziom}" />
+                    <a  th:text="${wiersz.wezel}" />
+                    <a  th:text="${wiersz.nazwa}" />
+                    <a  th:text="${wiersz.ojciec}" />
+                </div>
+            </div>
+
+
+</div>
+
+</body>
+</html>
